@@ -13,11 +13,11 @@ app:
 
   subscriberId: "dev.bap.protocol-server.com"
   subscriberUri: "https://ayush.free.beeceptor.com/"
-  
+
   registryUrl: https://registry.becknprotocol.io/subscribers
   auth: true
   uniqueKey: "dev.bap.protocol-server.key"
-  
+
   city: "std:080"
   country: "IND"
 
@@ -26,5 +26,5 @@ app:
 
   httpTimeout: 3000
   httpRetryCount: 2
-  
+
   clientUrl: "https://beckn.free.beeceptor.com/clientURL"

@@ -21,8 +21,8 @@ Protocol Server requires port number and db url to be configured.
 
 ```yaml
 port: 3000
-db: 
-    url: mongodb://localhost:27017/protocol
+db:
+  url: mongodb://localhost:27017/protocol
 ```
 
 - The port requires to be a valid integer number.The default port number is 3000.
@@ -40,76 +40,76 @@ In order to configure the protocol server as BAP, you need to provide the follow
 
 1. Specify the app mode to be `bap`.
 
-    ```yaml
-    app:
-        mode: bap
-    ```
+   ```yaml
+   app:
+     mode: bap
+   ```
 
 2. Specify the actions that this app will server.
 
-    ```yaml
-        actions:
-            - search
-            - init
-    ```
+   ```yaml
+   actions:
+     - search
+     - init
+   ```
 
 3. Provide the sigin public key and private key
 
-    ```yaml
-        privateKey: "your private key"
-        publicKey: "your public key"
-    ```
+   ```yaml
+   privateKey: "your private key"
+   publicKey: "your public key"
+   ```
 
 4. Specify the `subscriberId` and `subscriberUri` as per the registry which is also known as `bap_id` and `bap_uri`.
 
-    ```yaml
-        subscriberId: "dev.bap.protocol-server.com"
-        subscriberUri: "https://dev.bap.protocol-server.com/"
-    ```
+   ```yaml
+   subscriberId: "dev.bap.protocol-server.com"
+   subscriberUri: "https://dev.bap.protocol-server.com/"
+   ```
 
 5. Specify the registry url.
 
-    ```yaml
-        registryUrl: https://registry.becknprotocol.io/subscribers
-    ```
+   ```yaml
+   registryUrl: https://registry.becknprotocol.io/subscribers
+   ```
 
 6. Specify whether to authenticate the requests or not. This can be done by providing the `auth` property.
 
-    ```yaml
-        auth: true
-    ```
+   ```yaml
+   auth: true
+   ```
 
 7. The unique key id is also required to in order to create authorization.
 
-    ```yaml
-        uniqueKey: "dev.bap.protocol-server.key"
-    ```
+   ```yaml
+   uniqueKey: "dev.bap.protocol-server.key"
+   ```
 
 8. Provide the Operation Region Information.
 
-    ```yaml
-        city: "std:080"
-        country: "IND"
-    ```
+   ```yaml
+   city: "std:080"
+   country: "IND"
+   ```
 
 9. Provide the ttl for the requests and ttl for lookupCache.
 
-    ```yaml
-        ttl: "PT1M"
-        lookupCacheTTL: "PT10S"
-    ```
+   ```yaml
+   ttl: "PT1M"
+   lookupCacheTTL: "PT10S"
+   ```
 
 10. Provide the HTTP Configuration. The `httpTimeout` specify the timeout for the http requests in milliseconds. The `httpRetryCount` will specify the number of retries for the http requests.
 
     ```yaml
-        httpTimeout: 5000
-        httpRetryCount: 2
+    httpTimeout: 5000
+    httpRetryCount: 2
     ```
 
 11. Provide the `clientUrl` in order to the communicate the responses to client.
 
     ```yaml
-        clientUrl: "https://beckn.free.beeceptor.com/clientURL"
+    clientUrl: "https://beckn.free.beeceptor.com/clientURL"
     ```
 
 ### BPP Configuration
@@ -118,76 +118,76 @@ In order to configure the protocol server as BPP, you need to provide the follow
 
 1. Specify the app mode to be `bpp`.
 
-    ```yaml
-    app:
-        mode: bpp
-    ```
+   ```yaml
+   app:
+     mode: bpp
+   ```
 
 2. Specify the actions that this app will server.
 
-    ```yaml
-        actions:
-            - search
-            - init
-    ```
+   ```yaml
+   actions:
+     - search
+     - init
+   ```
 
 3. Provide the sigin public key and private key
 
-    ```yaml
-        privateKey: "your private key"
-        publicKey: "your public key"
-    ```
+   ```yaml
+   privateKey: "your private key"
+   publicKey: "your public key"
+   ```
 
 4. Specify the `subscriberId` and `subscriberUri` as per the registry which is also known as `bpp_id` and `bpp_uri`.
 
-    ```yaml
-        subscriberId: "dev.bpp.protocol-server.com"
-        subscriberUri: "https://dev.bpp.protocol-server.com/"
-    ```
+   ```yaml
+   subscriberId: "dev.bpp.protocol-server.com"
+   subscriberUri: "https://dev.bpp.protocol-server.com/"
+   ```
 
 5. Specify the registry url.
 
-    ```yaml
-        registryUrl: https://registry.becknprotocol.io/subscribers
-    ```
+   ```yaml
+   registryUrl: https://registry.becknprotocol.io/subscribers
+   ```
 
 6. Specify whether to authenticate the requests or not. This can be done by providing the `auth` property.
 
-    ```yaml
-        auth: true
-    ```
+   ```yaml
+   auth: true
+   ```
 
 7. The unique key id is also required to in order to create authorization.
 
-    ```yaml
-        uniqueKey: "dev.bpp.protocol-server.key"
-    ```
+   ```yaml
+   uniqueKey: "dev.bpp.protocol-server.key"
+   ```
 
 8. Provide the Operation Region Information.
 
-    ```yaml
-        city: "std:080"
-        country: "IND"
-    ```
+   ```yaml
+   city: "std:080"
+   country: "IND"
+   ```
 
 9. Provide the ttl for the requests and ttl for lookupCache.
 
-    ```yaml
-        ttl: "PT1M"
-        lookupCacheTTL: "PT10S"
-    ```
+   ```yaml
+   ttl: "PT1M"
+   lookupCacheTTL: "PT10S"
+   ```
 
 10. Provide the HTTP Configuration. The `httpTimeout` specify the timeout for the http requests in milliseconds. The `httpRetryCount` will specify the number of retries for the http requests.
 
     ```yaml
-        httpTimeout: 5000
-        httpRetryCount: 2
+    httpTimeout: 5000
+    httpRetryCount: 2
     ```
 
 11. Provide the `clientUrl` in order to the communicate the responses to client which is a provider application in case of BPP.
 
     ```yaml
-        clientUrl: "https://beckn.free.beeceptor.com/clientURL"
+    clientUrl: "https://beckn.free.beeceptor.com/clientURL"
     ```
 
 ## Open API Schema Validation
@@ -255,7 +255,7 @@ Generating Key Pairs...
 
 Key Pairs Generated
 
-Your Public Key : 
+Your Public Key :
  taRF+XAJ3o2E3NDWPj5fPGq5HTVNqa/DKPx8VTpMvlg=
 
 Your Private Key :
@@ -286,87 +286,89 @@ It's necessary for all requests from the Client Layer to be valid as per the [Be
 
 Each request body is divided into three parts:
 
-1. `context`: It consists of all the necessary information to validate and perform the request.
-Each request from the client layer needs to have a `context` as part of the request with the following information:
+1.  `context`: It consists of all the necessary information to validate and perform the request.
+    Each request from the client layer needs to have a `context` as part of the request with the following information:
 
-    - `domain` : The domain of the request.
+        - `domain` : The domain of the request.
 
-    - `core_version`: The version of the Beckn protocol.
+        - `core_version`: The version of the Beckn protocol.
 
-    - `bpp_id`: This field is mandatory in the case of non-search calls.
+        - `bpp_id`: This field is mandatory in the case of non-search calls.
 
-    - `bpp_uri`: This field is mandatory in the case of non-search calls.
+        - `bpp_uri`: This field is mandatory in the case of non-search calls.
 
-    The optional fields which will be provided configured value in case not provided.
+        The optional fields which will be provided configured value in case not provided.
 
-    - `country`: This is an optional field and is used to specify the country of the request.
+        - `country`: This is an optional field and is used to specify the country of the request.
 
-    - `city`: This is an optional field and is used to specify the city of the request.  
+        - `city`: This is an optional field and is used to specify the city of the request.
 
-    - `transaction_id`: This is an optional field and is used to specify the transaction id of the request.
+        - `transaction_id`: This is an optional field and is used to specify the transaction id of the request.
 
-    The other fields which will be configured by the Protocol Server are:
+        The other fields which will be configured by the Protocol Server are:
 
-    - `message_id`: This id will be generated by protocol server on request and is used to specify the message id of the request.
+        - `message_id`: This id will be generated by protocol server on request and is used to specify the message id of the request.
 
-    - `ttl`: This will be configured by the protocol server as per the provided value in configuration file.
+        - `ttl`: This will be configured by the protocol server as per the provided value in configuration file.
 
-    - `timestamp`: This will be autogenerated at the time of request.
+        - `timestamp`: This will be autogenerated at the time of request.
 
-    - `bap_id`: This will be configured by the protocol server as per the provided value in configuration file.
+        - `bap_id`: This will be configured by the protocol server as per the provided value in configuration file.
 
-    - `bap_uri`: This will be configured by the protocol server as per the provided value in configuration file.
+        - `bap_uri`: This will be configured by the protocol server as per the provided value in configuration file.
 
-    - `action`: This will be configured by the protocol depending on the request.
+        - `action`: This will be configured by the protocol depending on the request.
 
-2. `message`: The message is the actual request body. It is the payload of the request. It needs to strictly follow the [Beckn Protocol Specifications](https://github.com/beckn/protocol-specifications). Any violation will lead to the request being rejected.
+2.  `message`: The message is the actual request body. It is the payload of the request. It needs to strictly follow the [Beckn Protocol Specifications](https://github.com/beckn/protocol-specifications). Any violation will lead to the request being rejected.
 
-3. `error`: It is the error response in case of any error. It's an optional field. Refer to [Beckn Protocol Specifications](https://github.com/beckn/protocol-specifications).
+3.  `error`: It is the error response in case of any error. It's an optional field. Refer to [Beckn Protocol Specifications](https://github.com/beckn/protocol-specifications).
 
 ### Steps
 
 1. The client needs to implement a webhook in order to recieve the requests and responses from the protocol server.
 
-    - The webhook needs to be configured with the `clientUrl` provided in the configuration file.
+   - The webhook needs to be configured with the `clientUrl` provided in the configuration file.
 
-    - All the requests and responses recieved from the network will be sent to the webhook.
+   - All the requests and responses recieved from the network will be sent to the webhook.
 
-    - This API needs to be a `POST` api.
+   - This API needs to be a `POST` api.
 
 2. The communication from client layer to protocol server (BAP Mode) is through the HTTP webhooks. Each request will be sent as a `POST` request.
-    Here the api path will be in the format.
+   Here the api path will be in the format.
 
-    ```curl
-    <protocol-server-host>/<action>
-    ```
+   ```curl
+   <protocol-server-host>/<action>
+   ```
 
-    Here the action can be one of the following:
-    - `search`
-    - `init`
-    - `select`
-    - `update`
-    - `confirm`
-    - `cancel`
-    - `status`
-    - `track`
+   Here the action can be one of the following:
+
+   - `search`
+   - `init`
+   - `select`
+   - `update`
+   - `confirm`
+   - `cancel`
+   - `status`
+   - `track`
 
 3. In case when the protocol server is configured in BPP mode, each request from the network will be sent to the client layer as a `POST` request to the `clientUrl` provided in the configuration file. Once the request is processed the responses needs to be sent back to the protocol server.
 
-    Here the api path will be in the format.
+   Here the api path will be in the format.
 
-    ```curl
-    <protocol-server-host>/<action>
-    ```
+   ```curl
+   <protocol-server-host>/<action>
+   ```
 
-    Here the action can be one of the following:
-    - `on_search`
-    - `on_init`
-    - `on_select`
-    - `on_update`
-    - `on_confirm`
-    - `on_cancel`
-    - `on_status`
-    - `on_track`
+   Here the action can be one of the following:
+
+   - `on_search`
+   - `on_init`
+   - `on_select`
+   - `on_update`
+   - `on_confirm`
+   - `on_cancel`
+   - `on_status`
+   - `on_track`
 
 ### Note
 
