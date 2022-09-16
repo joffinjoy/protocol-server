@@ -1,8 +1,8 @@
-const acknowledgement={
-    context:{},
-    message: {
-        ack: {
-            status: "ACK",
-        },
+const acknowledgement = {
+  context: {},
+  message: {
+    ack: {
+      status: "ACK",
     },
-}
+  },
+};

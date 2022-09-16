@@ -2,8 +2,15 @@ import { z } from "zod";
 import { Exception, ExceptionType } from "../../models/exception.model";
 import { appConfigSchema, AppMode, parseAppConfig } from "./app.config.schema";
 import { cacheConfigSchema, parseCacheConfig } from "./cache.config.schema";
-import { clientConfigSchema, ClientConfigType, parseClientConfig } from "./client.config.schema";
-import { parseResponseCacheConfig, responseCacheConfigSchema } from "./response.cache.config.schema";
+import {
+  clientConfigSchema,
+  ClientConfigType,
+  parseClientConfig,
+} from "./client.config.schema";
+import {
+  parseResponseCacheConfig,
+  responseCacheConfigSchema,
+} from "./response.cache.config.schema";
 import { parseServerConfig, serverConfigSchema } from "./server.config.schema";
 
 // Create the schema for the config file using other config schemas.
@@ -15,34 +22,38 @@ import { parseServerConfig, serverConfigSchema } from "./server.config.schema";
 //      server, cache, client, app
 
 export const configSchema = z.object({
-    server: serverConfigSchema,
-    cache: cacheConfigSchema,
-    responseCache: responseCacheConfigSchema,
-    client: clientConfigSchema,
-    app: appConfigSchema,
+  server: serverConfigSchema,
+  cache: cacheConfigSchema,
+  responseCache: responseCacheConfigSchema,
+  client: clientConfigSchema,
+  app: appConfigSchema,
 });
 
 export type ConfigDataType = z.infer<typeof configSchema>;
 
 export const parseConfig = (config: any): ConfigDataType => {
-    const serverConfig = parseServerConfig(config.server);
-    const cacheConfig = parseCacheConfig(config.cache);
-    const responseCacheConfig = parseResponseCacheConfig(config.responseCache);
-    const clientConfig = parseClientConfig(config.client);
-    const appConfig = parseAppConfig(config.app);
+  const serverConfig = parseServerConfig(config.server);
+  const cacheConfig = parseCacheConfig(config.cache);
+  const responseCacheConfig = parseResponseCacheConfig(config.responseCache);
+  const clientConfig = parseClientConfig(config.client);
+  const appConfig = parseAppConfig(config.app);
 
-    const configObject: ConfigDataType = {
-        server: serverConfig,
-        cache: cacheConfig,
-        responseCache: responseCacheConfig,
-        client: clientConfig,
-        app: appConfig,
-    };
+  const configObject: ConfigDataType = {
+    server: serverConfig,
+    cache: cacheConfig,
+    responseCache: responseCacheConfig,
+    client: clientConfig,
+    app: appConfig,
+  };
 
-    if (configObject.app.mode === AppMode.bpp) {
-        if (configObject.client.type === ClientConfigType.synchronous) {
-            throw new Exception(ExceptionType.Config_BPPConfigurationInvalid, "BPP configuration is invalid, synchronous is not an option for BPP Mode.", 400);
-        }
+  if (configObject.app.mode === AppMode.bpp) {
+    if (configObject.client.type === ClientConfigType.synchronous) {
+      throw new Exception(
+        ExceptionType.Config_BPPConfigurationInvalid,
+        "BPP configuration is invalid, synchronous is not an option for BPP Mode.",
+        400
+      );
     }
-    return configObject;
-}
+  }
+  return configObject;
+};
