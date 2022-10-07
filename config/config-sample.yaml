@@ -1,19 +1,19 @@
 # Mandatory
 server:
-  port: 5000
+    port: 5000
 
 # Mandatory.
 cache:
-  host: "localhost"
-  port: 6379
-  ttl: "PT10M"
-  # Optional. Default is 0.
-  db: 1
+    host: 'localhost'
+    port: 6379
+    ttl: 'PT10M'
+    # Optional. Default is 0.
+    db: 1
 
 # Optional.
 responseCache:
-  mongoURL: "mongodb://tvast:password@localhost:27017/protocol_server-v2?authSource=admin"
-  ttl: "PT10M"
+    mongoURL: 'mongodb://localhost:27017/protocol_server-v2'
+    ttl: 'PT10M'
 
 # Mandatory.
 # Priority order will be
@@ -21,65 +21,64 @@ responseCache:
 # 2. webhook
 # 3. pubSub
 client:
-  synchronous:
-    mongoURL: "mongodb://tvast:password@localhost:27017/protocol_server-v2?authSource=admin"
+    synchronous:
+        mongoURL: 'mongodb://localhost:27017/protocol_server-v2'
+    webhook:
+        url: 'https://beckn.free.beeceptor.com/clientURL'
 
-  webhook:
-    url: "https://beckn.free.beeceptor.com/clientURL"
-
-  messageQueue:
-    amqpURL: "amqp://guest:guest@localhost:5672"
-    incomingQueue: "protocol-server-incoming"
-    outgoingQueue: "protocol-server-outgoing"
+    messageQueue:
+        amqpURL: 'amqp://guest:guest@localhost:5672'
+        incomingQueue: 'protocol-server-incoming'
+        outgoingQueue: 'protocol-server-outgoing'
 
 # Mandatory.
 app:
-  # Mandatory.
-  mode: bap
+    # Mandatory.
+    mode: bap
 
-  # Two types of gateway mode present.
-  # client and network.
-  gateway:
-    mode: client
-    inboxQueue: "inbox"
-    outboxQueue: "outbox"
-    amqpURL: "amqp://guest:guest@localhost:5672"
+    # Two types of gateway mode present.
+    # client and network.
+    gateway:
+        mode: client
+        inboxQueue: 'inbox'
+        outboxQueue: 'outbox'
+        amqpURL: 'amqp://guest:guest@localhost:5672'
 
-  # Mandatory.
-  actions:
-    requests:
-      search:
-        ttl: "PT10S"
-      init:
-        ttl: "PT10S"
+    # Mandatory.
+    actions:
+        requests:
+            search:
+                ttl: 'PT10S'
+            init:
+                ttl: 'PT10S'
 
-    responses:
-      on_search:
-        ttl: "PT10S"
+        responses:
+            on_search:
+                ttl: 'PT10S'
 
-      on_init:
-        ttl: "PT10S"
+            on_init:
+                ttl: 'PT10S'
 
-  # Mandatory.
-  privateKey: "your private key"
-  publicKey: "your public key"
+    # Mandatory.
+    privateKey: '0xe/2NJSka++v9QCLy58EdNjuAdDw680gkrw4cYRs+rN/mXVsVrDn9R/IZMDJKkB9BqEsADymAyR4qjcWLBTVA=='
+    publicKey: 'zf5l1bFaw5/UfyGTAySpAfQahLAA8pgMkeKo3FiwU1Q='
 
-  # Mandatory.
-  subscriberId: "dev.bap.protocol-server.com"
-  subscriberUri: "https://ayush.free.beeceptor.com/"
+    # Mandatory.
+    subscriberId: 'dev.bap.protocol-server.com'
+    subscriberUri: 'https://ayush.free.beeceptor.com/'
 
-  # Mandatory.
-  registryUrl: https://registry.becknprotocol.io/subscribers
-  auth: true
-  uniqueKey: "dev.bap.protocol-server.key"
+    # Mandatory.
+    registryUrl: https://registry.becknprotocol.io/subscribers
+    auth: true
+    uniqueKey: 'dev.bap.protocol-server.key'
 
-  # Mandatory.
-  city: "std:080"
-  country: "IND"
+    # Mandatory.
+    city: 'std:080'
+    country: 'IND'
 
-  # Mandatory.
-  ttl: "PT10M"
+    # Mandatory.
+    ttl: 'PT10M'
 
-  # Mandatory.
-  httpTimeout: "PT3S"
-  httpRetryCount: 2
+    # Mandatory.
+    httpTimeout: 'PT3S'
+    httpRetryCount: 2

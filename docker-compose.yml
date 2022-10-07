@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mongo:
+    image: 'mongo:4.4.14'
+    restart: 'always'
+    ports:
+      - '27017:27018'
+    networks:
+      - beckn_net
+    volumes:
+      - mongo-data:/data/db
+    logging:
+      driver: none
+  protocol-server:
+    build: './'
+    image: elevate/protocol-server:1.0
+    volumes:
+      - ./:/var/
+    ports:
+      - '5000:5000'
+    command: ['nodemon', 'src/app.ts']
+    depends_on:
+      - mongo
+    networks:
+      - beckn_net
+networks:
+  beckn_net:
+    external: false
+volumes:
+  mongo-data:
