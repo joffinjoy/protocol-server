@@ -23,6 +23,7 @@ if (
 ) {
   const responseActions = getConfig().app.actions.responses;
   Object.keys(ResponseActions).forEach((action) => {
+    console.log(action)
     if (responseActions[action as ResponseActions]) {
       responsesRouter.post(
         `/${action}`,
@@ -30,6 +31,7 @@ if (
         authValidatorMiddleware,
         openApiValidatorMiddleware,
         async (req: Request, res: Response, next: NextFunction) => {
+            console.log(req)
           await bapNetworkResponseHandler(
             req,
             res,

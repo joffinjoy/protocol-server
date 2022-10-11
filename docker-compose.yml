@@ -11,6 +11,24 @@ services:
       - mongo-data:/data/db
     logging:
       driver: none
+  ampq:
+    image: 'rabbitmq:3.11.0'
+    restart: 'always'
+    ports:
+      - '5672:5672'
+    networks:
+      - beckn_net
+    logging:
+      driver: none
+  redis:
+    image: 'redis:7.0.0'
+    restart: 'always'
+    expose:
+      - '6379'
+    networks:
+      - beckn_net
+    logging:
+      driver: none
   protocol-server:
     build: './'
     image: elevate/protocol-server:1.0

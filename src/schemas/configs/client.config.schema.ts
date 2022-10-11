@@ -130,6 +130,7 @@ export const parseClientConfig = (config: any): ClientConfigDataType => {
   }
 
   if (Object.keys(config).length > 1) {
+    console.log(config)
     throw new Exception(
       ExceptionType.Config_ClientConfig_Invalid,
       "More than one type of Client Configuration found.",

@@ -27,6 +27,7 @@ export const registryLookup = async (lookupParameter: LookupParameter) => {
       combineURLs(getConfig().app.registryUrl, "/lookup"),
       lookupParameter
     );
+    console.log(response)
     const subscribers: Array<SubscriberDetail> = [];
     response.data.forEach((data: object) => {
       try {

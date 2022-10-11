@@ -28,7 +28,9 @@ if (
 ) {
   const requestActions = getConfig().app.actions.requests;
   Object.keys(RequestActions).forEach((action) => {
+    console.log(action)
     if (requestActions[action as RequestActions]) {
+
       // requestsRouter.post(`/${action}`, jsonCompressorMiddleware, contextBuilderMiddleware, authBuilderMiddleware, openApiValidatorMiddleware, bapClientTriggerHandler);
       requestsRouter.post(
         `/${action}`,

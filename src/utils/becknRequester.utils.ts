@@ -15,6 +15,7 @@ export const makeBecknRequest = async (
 ): Promise<BecknResponse> => {
   try {
     const requestURL = combineURLs(subscriberUrl, `/${action}`);
+    console.log(requestURL, body, axios_config)
 
     const response = await axios.post(requestURL, body, axios_config);
 

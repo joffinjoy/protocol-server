@@ -26,6 +26,7 @@ async function makeClientCallback(data: any) {
 
     const clientConnectionConfig = getConfig().client
       .connection as WebhookClientConfigDataType;
+    console.log(data)
     const response = await axios.post(clientConnectionConfig.url, data);
   } catch (error: any) {
     if (error instanceof Exception) {

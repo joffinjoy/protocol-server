@@ -91,15 +91,20 @@ export const bapClientTriggerSettler = async (
   message: AmqbLib.ConsumeMessage | null
 ) => {
   try {
+    console.log("REACHED HEEEEEEEEEEEEEEEEEEEEEEEEEERE")
     const requestBody = JSON.parse(message?.content.toString()!);
     const context = becknContextSchema.parse(requestBody.context);
     const axios_config = await createAuthHeaderConfig(requestBody);
+    console.log(axios_config)
 
     const bpp_id = requestBody.context.bpp_id;
     const bpp_uri = requestBody.context.bpp_uri;
     const action = requestBody.context.action;
+    console.log(bpp_id, bpp_uri,action)
+
 
     let response: BecknResponse | undefined;
+    console.log(bpp_id, bpp_uri)
     if (bpp_id && bpp_uri && bpp_id !== "" && bpp_uri !== "") {
       const subscribers = await registryLookup({
         type: NetworkPaticipantType.BPP,

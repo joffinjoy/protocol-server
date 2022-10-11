@@ -62,6 +62,7 @@ export const bppClientResponseSettler = async (
     );
     const action = context.action;
     const bap_uri = responseBody.context.bap_uri;
+    console.log(responseBody)
 
     const requestCache = await RequestCache.getInstance().check(
       message_id,
