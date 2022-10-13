@@ -84,7 +84,7 @@ export const createAuthorizationHeader = async (message: any) => {
   );
   console.log("SIGNING STRING: ", signing_string)
   console.log("CREATED: ", created)
-  console.log("EXPIRES: ", expired)
+  console.log("EXPIRES: ", expires)
   const signature = await signMessage(
     signing_string,
     getConfig().app.privateKey || ""
@@ -104,19 +104,27 @@ export const verifyMessage = async (
   publicKey: string
 ) => {
   try {
+    console.log("START: verifyMessage ----------------------------------------")
+    console.log("SIGNED STRING: ", signedString)
+    console.log("SIGNING STRING: ", signingString)
+    console.log("PUBLIC KEY: ", publicKey)
     await _sodium.ready;
     const sodium = _sodium;
-    return sodium.crypto_sign_verify_detached(
-      sodium.from_base64(signedString, base64_variants.ORIGINAL),
-      signingString,
-      sodium.from_base64(publicKey, base64_variants.ORIGINAL)
-    );
+    const something = sodium.crypto_sign_verify_detached(
+        sodium.from_base64(signedString, base64_variants.ORIGINAL),
+        signingString,
+        sodium.from_base64(publicKey, base64_variants.ORIGINAL)
+      );
+    console.log("RESULT OF verifyMessage: ", something)
+    console.log("END: verifyMessage ----------------------------------------")
+    return something
   } catch (error) {
     return false;
   }
 };
 
 const remove_quotes = (value: string) => {
+    console.log("START: remove_quotes ----------------------------------------")
   if (
     value.length >= 2 &&
     value.charAt(0) == '"' &&
@@ -124,11 +132,15 @@ const remove_quotes = (value: string) => {
   ) {
     value = value.substring(1, value.length - 1);
   }
+  console.log("END: remove_quotes ----------------------------------------")
   return value;
 };
 
 const split_auth_header = (auth_header: string) => {
+    console.log("START: split_auth_header ----------------------------------------")
+    console.log("AUTH_HEADER: ", auth_header)
   const header = auth_header.replace("Signature ", "");
+  console.log("HEADER: ", header)
   let re = /\s*([^=]+)=([^,]+)[,]?/g;
   let m;
   let parts: any = {};
@@ -137,10 +149,14 @@ const split_auth_header = (auth_header: string) => {
       parts[m[1]] = remove_quotes(m[2]);
     }
   }
+  console.log("PARTS: ", parts)
+  console.log("END: split_auth_header ----------------------------------------")
   return parts;
 };
 
 const split_auth_header_space = (auth_header: string) => {
+    console.log("START: split_auth_header_space ----------------------------------------")
+    console.log("AUTH_HEADER: ", auth_header)
   const header = auth_header.replace("Signature ", "");
   let re = /\s*([^=]+)=\"([^"]+)"/g;
   let m;
@@ -150,6 +166,7 @@ const split_auth_header_space = (auth_header: string) => {
       parts[m[1]] = m[2];
     }
   }
+  console.log("END: split_auth_header_space ----------------------------------------")
   return parts;
 };
 
@@ -157,18 +174,24 @@ export async function getSenderDetails(
   header: string
 ): Promise<SubscriberDetail> {
   try {
+    console.log("START: getSenderDetails ----------------------------------------")
+    console.log("HEADER: ", header)
     const parts = split_auth_header(header);
+    console.log("PARTS: ", parts)
     if (!parts || Object.keys(parts).length === 0) {
       throw new Error("Header parsing failed");
     }
 
     const subscriber_id = parts["keyId"].split("|")[0] as string;
     const unique_key_id = parts["keyId"].split("|")[1] as string;
-
+    console.log("SUBSCRIBER ID: ", subscriber_id)
+    console.log("UNIQUE ID: ", unique_key_id)
     const subscriber_details = await getSubscriberDetails(
       subscriber_id,
       unique_key_id
     );
+    console.log("SUBSCRIBER DETAILS: ", subscriber_details)
+    console.log("END: getSenderDetails ----------------------------------------")
     return subscriber_details;
   } catch (error) {
     throw error;
@@ -181,7 +204,13 @@ export async function verifyHeader(
   res: Response
 ) {
   try {
+    console.log("START: verifyHeader ----------------------------------------")
+    console.log("HEADER: ", header)
+    console.log("REQUEST ",req)
+    console.log("RESPONSE: ", res)
     const parts = split_auth_header(header);
+
+    console.log("PARTS: ", parts)
     if (!parts || Object.keys(parts).length === 0) {
       throw new Exception(
         ExceptionType.Authentication_HeaderParsingFailed,
@@ -192,22 +221,29 @@ export async function verifyHeader(
 
     const subscriber_id = parts["keyId"].split("|")[0];
     const unique_key_id = parts["keyId"].split("|")[1];
+    console.log("SUBSCRIBER ID: ", subscriber_id)
+    console.log("UNIQUE ID: ", unique_key_id)
     const subscriber_details = await getSubscriberDetails(
       subscriber_id,
       unique_key_id
     );
-    console.log(req.body?.context?.transaction_id, subscriber_details);
+    console.log("SUBSCRIBER DETAILS: ", subscriber_details)
+    //console.log(req.body?.context?.transaction_id, subscriber_details);
     const public_key = subscriber_details.signing_public_key;
+    console.log("PUBLIC KEY: ", public_key)
     const { signing_string } = await createSigningString(
       res.locals.rawBody,
       parts["created"],
       parts["expires"]
     );
+    console.log("SIGNING STRING: ", signing_string)
     const verified = await verifyMessage(
       parts["signature"],
       signing_string,
       public_key
     );
+    console.log("VERIFIED: ", verified)
+    console.log("START: verifyHeader ----------------------------------------")
     return verified;
   } catch (error) {
     logger.error(error);
@@ -218,12 +254,14 @@ export async function verifyHeader(
 export const createAuthHeaderConfig = async (request: any) => {
     console.log("START: createAuthHeaderConfig ----------------------------------------")
   const header = await createAuthorizationHeader(request);
+  console.log("HEADER: ", header)
   const axios_config = {
     headers: {
       authorization: header,
     },
     timeout: getConfig().app.httpTimeout,
   };
+  console.log("AXIOS CONFIG: ", axios_config)
   console.log("END: createAuthHeaderConfig ----------------------------------------")
   return axios_config;
 };
