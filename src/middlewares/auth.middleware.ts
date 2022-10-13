@@ -76,7 +76,8 @@ export async function authBuilderMiddleware(
 ) {
   try {
     console.log('START: authBuilderMiddleware -----------------------------------------------------')
-    console.log("REQUEST BODY: ",req.body)
+    console.log("REQUEST HEADERS: ", JSON.stringify(req.headers, null, '\t'))
+    console.debug("REQUEST BODY: ", JSON.stringify(req.body, null, '\t'))
     const axios_config = await createAuthHeaderConfig(req.body);
     console.log("AXIOS CONFIG: ", axios_config)
     req.headers.authorization = axios_config.headers.authorization;

@@ -30,7 +30,7 @@ export const registryLookup = async (lookupParameter: LookupParameter) => {
       combineURLs(getConfig().app.registryUrl, "/lookup"),
       lookupParameter
     );
-    console.log(response)
+    console.log("LOOK UP RESONSE: ",response.data)
     const subscribers: Array<SubscriberDetail> = [];
     response.data.forEach((data: object) => {
       try {

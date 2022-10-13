@@ -30,6 +30,9 @@ export const bapClientTriggerHandler = async (
   next: NextFunction,
   action: RequestActions
 ) => {
+    console.log("START: bapClientTriggerHandler ------------------------------------------------------")
+    console.log("REQUEST HEADERS: ", JSON.stringify(req.headers, null, '\t'))
+    console.debug("RES BODY:",JSON.stringify(req.body, null, '\t'))
   try {
     const bpp_id: string | undefined = req.body.context.bpp_id;
     const bpp_uri: string | undefined = req.body.context.bpp_uri;
