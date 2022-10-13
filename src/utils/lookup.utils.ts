@@ -16,9 +16,12 @@ export function combineURLs(baseURL: string, relativeURL: string) {
 
 export const registryLookup = async (lookupParameter: LookupParameter) => {
   try {
+    console.log('REACHED REGISTRY LOOKUP')
+    console.log(lookupParameter)
     const lookupCache = LookupCache.getInstance();
     const cachedResponse = await lookupCache.check(lookupParameter);
     if (cachedResponse) {
+        console.log(cachedResponse)
       return cachedResponse;
     }
 
@@ -27,6 +30,7 @@ export const registryLookup = async (lookupParameter: LookupParameter) => {
       combineURLs(getConfig().app.registryUrl, "/lookup"),
       lookupParameter
     );
+    console.log(response)
     const subscribers: Array<SubscriberDetail> = [];
     response.data.forEach((data: object) => {
       try {
@@ -59,11 +63,12 @@ export async function getSubscriberDetails(
   unique_key_id: string
 ) {
   try {
+    console.log("START: getSubscriberDetails -----------------------------------------")
     const subsribers = await registryLookup({
       subscriber_id: subscriber_id,
       unique_key_id: unique_key_id,
     });
-
+    console.log("SUBSCRIBERS: ", subsribers)
     if (subsribers.length == 0) {
       throw new Exception(
         ExceptionType.Registry_NoSubscriberFound,
@@ -71,7 +76,7 @@ export async function getSubscriberDetails(
         404
       );
     }
-
+    console.log("END: getSubscriberDetails -----------------------------------------")
     return subsribers[0];
   } catch (error: any) {
     if (error instanceof Exception) {

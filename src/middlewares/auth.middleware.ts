@@ -17,6 +17,7 @@ export const authValidatorMiddleware = async (
   res: Response<{}, Locals>,
   next: NextFunction
 ) => {
+    console.log("REACHED AUTH VALIDATOR MIDDLEWARE")
   try {
     console.log("\nNew Request txn_id", req.body?.context?.transaction_id);
     if (req.body?.context?.bap_id) {
@@ -74,13 +75,18 @@ export async function authBuilderMiddleware(
   next: NextFunction
 ) {
   try {
+    console.log('START: authBuilderMiddleware -----------------------------------------------------')
+    console.log("REQUEST BODY: ",req.body)
     const axios_config = await createAuthHeaderConfig(req.body);
+    console.log("AXIOS CONFIG: ", axios_config)
     req.headers.authorization = axios_config.headers.authorization;
     const senderDetails = await getSubscriberDetails(
       getConfig().app.subscriberId,
       getConfig().app.uniqueKey
     );
+    console.log("SENDER DETAILS: ", senderDetails)
     res.locals.sender = senderDetails;
+    console.log('END: authBuilderMiddleware -------------------------------------------------')
     next();
   } catch (error) {
     next(error);

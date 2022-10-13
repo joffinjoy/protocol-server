@@ -9,7 +9,7 @@ export const actionConfigSchema = z.object({
       const duration = moment.duration(value);
       return duration.asMilliseconds();
     })
-    .default("PT10S"),
+    .default("PT1S"),
 });
 
 export type ActionConfigDataType = z.infer<typeof actionConfigSchema>;
