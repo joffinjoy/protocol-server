@@ -14,10 +14,14 @@ export const makeBecknRequest = async (
   action: string
 ): Promise<BecknResponse> => {
   try {
+      console.log("START: MAKE BECKN REQUEST....................................................")
     const requestURL = combineURLs(subscriberUrl, `/${action}`);
-
+    console.log(requestURL)
+    console.log(body)
+    console.log(axios_config)
     const response = await axios.post(requestURL, body, axios_config);
-
+    console.log(response)
+    console.log("START: MAKE BECKN REQUEST....................................................")
     return {
       data: JSON.stringify(response.data),
       status: response.status,

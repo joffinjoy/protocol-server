@@ -18,8 +18,11 @@ export const authValidatorMiddleware = async (
   next: NextFunction
 ) => {
     console.log("REACHED AUTH VALIDATOR MIDDLEWARE")
+    console.log('START: authValidatorMiddleware -----------------------------------------------------')
+    console.log("REQUEST HEADERS: ", JSON.stringify(req.headers, null, '\t'))
+    console.debug("REQUEST BODY: ", JSON.stringify(req.body, null, '\t'))
   try {
-    console.log("\nNew Request txn_id", req.body?.context?.transaction_id);
+    //console.log("\nNew Request txn_id", req.body?.context?.transaction_id);
     if (req.body?.context?.bap_id) {
       console.log(
         req.body?.context?.transaction_id,
@@ -30,26 +33,30 @@ export const authValidatorMiddleware = async (
     const auth_header = req.headers["authorization"] || "";
     const proxy_header = req.headers["proxy-authorization"] || "";
     console.log(req.body?.context?.transaction_id, "headers", req.headers);
-
+    console.log("AUTH HEADER: ", auth_header)
+    console.log("PROXY HEADER: ", proxy_header)
     let authVerified = true;
     const isAuthRequired = config.get("app.auth");
     if (isAuthRequired) {
       var verified = await verifyHeader(auth_header, req, res);
+      console.log("VERIFIED: ", verified)
       var verified_proxy = proxy_header
         ? await verifyHeader(proxy_header, req, res)
         : true;
-      console.log(
+        console.log("VERIFIED PROXY: ", verified_proxy)
+      /* console.log(
         req.body?.context?.transaction_id,
         "Verification status:",
         verified,
         "Proxy verification:",
         verified_proxy
-      );
+      ); */
       authVerified = verified && verified_proxy;
     }
 
     if (authVerified) {
       const senderDetails = await getSenderDetails(auth_header);
+      console.log("SENDER DETAILS: ", senderDetails)
       res.locals.sender = senderDetails;
       next();
     } else {

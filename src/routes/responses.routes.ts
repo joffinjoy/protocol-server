@@ -28,7 +28,7 @@ if (
         `/${action}`,
         jsonCompressorMiddleware,
         authValidatorMiddleware,
-        openApiValidatorMiddleware,
+        /* openApiValidatorMiddleware, */
         async (req: Request, res: Response, next: NextFunction) => {
           await bapNetworkResponseHandler(
             req,

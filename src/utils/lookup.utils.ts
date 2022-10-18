@@ -34,7 +34,9 @@ export const registryLookup = async (lookupParameter: LookupParameter) => {
     const subscribers: Array<SubscriberDetail> = [];
     response.data.forEach((data: object) => {
       try {
+        console.log("DATAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA: ", data)
         const subscriberData = subscriberDetailsSchema.parse(data);
+        console.log("SUBSCRIBER DATA: ", subscriberData)
         subscribers.push(subscriberData);
       } catch (error) {
         // console.log(data);
